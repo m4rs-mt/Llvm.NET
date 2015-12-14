@@ -7,18 +7,19 @@ namespace Llvm.NET
     {
         public static void InitializeAll()
         {
-           InitializeCore( );
-           InitializeTransformUtils( );
-           InitializeScalarOpts( );
-           InitializeObjCARCOpts( );
-           InitializeVectorization( );
-           InitializeInstCombine( );
-           InitializeIPO( );
-           InitializeInstrumentation( );
-           InitializeAnalysis( );
-           InitializeIPA( );
-           InitializeCodeGen( );
-           InitializeTarget( );
+            InitializeCore( );
+            InitializeScalarOpts( );
+            InitializeObjCARCOpts( );
+            InitializeVectorization( );
+            InitializeIPO( );
+            InitializeAnalysis( );
+            InitializeIPA( );
+            InitializeTransformUtils( );
+            InitializeInstCombine( );
+            InitializeInstrumentation( );
+            InitializeTarget( );
+
+            InitializeCodeGen( );
         }
 
         public static void InitializeCore()

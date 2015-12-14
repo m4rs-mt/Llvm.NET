@@ -54,9 +54,10 @@
         }
     }
 
+    /// <summary>Provides fluent style methods for setting properties on a GlobalValue</summary>
     public static class GlobalValueExtensions
     {
-        /// <summary>Visibility of this global value</summary>
+        /// <summary>Sets the Visibility of this global value</summary>
         public static T Visibility<T>( this T self, Visibility value )
             where T : GlobalValue
         {
@@ -64,7 +65,7 @@
             return self;
         }
 
-        /// <summary>Linkage specification for this symbol</summary>
+        /// <summary>Sets the Linkage specification for this symbol</summary>
         public static T Linkage<T>( this T self, Linkage value )
             where T : GlobalValue
         {

@@ -571,6 +571,11 @@ namespace Llvm.NET
             return Value.FromHandle<ConstantFP>( NativeMethods.ConstReal( DoubleType.GetTypeRef(), constValue ) );
         }
 
+        public NativeModule ParseModule( string path )
+        {
+            return NativeModule.LoadFrom( path, this );
+        }
+
         #region Interning Factories
         internal void AddModule( NativeModule module )
         {

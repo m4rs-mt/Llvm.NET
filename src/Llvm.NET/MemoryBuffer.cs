@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Llvm.NET
 {
@@ -10,6 +11,12 @@ namespace Llvm.NET
         /// <param name="path">Path of the file to load into a <see cref="MemoryBuffer"/></param>
         public MemoryBuffer( string path )
         {
+            if( string.IsNullOrWhiteSpace( path ) )
+                throw new ArgumentException( "Path cannot be null or an empty string", nameof( path ) );
+
+            if( !File.Exists( path ) )
+                throw new FileNotFoundException( "Specified file not found", path );
+
             IntPtr msg;
             if( NativeMethods.CreateMemoryBufferWithContentsOfFile( path, out BufferHandle_, out msg ).Succeeded )
                 return;

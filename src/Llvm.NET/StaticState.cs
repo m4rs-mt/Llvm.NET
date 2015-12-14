@@ -29,9 +29,28 @@ namespace Llvm.NET
     /// <summary>Provides support for various LLVM static state initialization and manipulation</summary>
     public static class StaticState
     {
+        /// <summary>Parses LLVM command line options</summary>
+        /// <param name="args">Arguments to parse</param>
+        /// <param name="overview">Application overview for help</param>
+        /// <remarks>
+        /// <par>The first element of the <paramref name="args"/> array is the executable program
+        /// itself, as is the standard case for C and C++ applications. This is idfferent then
+        /// standard .NET which does not include the program name itself.</par>
+        /// <note type="note">
+        /// It is important to note that if the "-help" or "-help-hidden" argument is present
+        /// then this will print the help information to the console AND terminate the application
+        /// via a call to the C Library funct extit(). This is an unfortunate behavior of the LLVM
+        /// parsing in that it doesn't seperate the parse from action of printing the help and exit.
+        /// </note>
+        /// </remarks>
         public static void ParseCommandLineOptions( string[] args, string overview )
         {
+            NativeMethods.CreateCustomBooleanOption( "TestOption", "A test Option", false );
             NativeMethods.ParseCommandLineOptions( args.Length, args, overview );
+            LLVMBool val;
+            var retVal = NativeMethods.GetBooleanOption( "bb-vectorize-max-instr-per-group", out val );
+            UInt32 val32;
+            retVal = NativeMethods.GetUnsignedOption( "bb-vectorize-max-instr-per-group", out val32 );
         }
 
         // basic pattern to follow for any new targets in the future

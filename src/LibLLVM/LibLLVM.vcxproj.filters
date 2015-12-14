@@ -46,6 +46,9 @@
     <ClCompile Include="DITypeBindings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CommandLineOoptionBindings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DIBuilderBindings.h">

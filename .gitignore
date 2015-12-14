@@ -201,3 +201,6 @@ FakesAssemblies/
 /src/Documentation/Help
 
 /Tools
+
+# VS2015 support file
+*.opendb

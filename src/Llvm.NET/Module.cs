@@ -551,19 +551,14 @@ namespace Llvm.NET
         /// <param name="path">path of the file to load</param>
         /// <param name="context">Context to use for creating the module</param>
         /// <returns>Loaded <see cref="NativeModule"/></returns>
+        /// <remarks>The input file may be a textual LLVM source file or an LLVM binary bit code file</remarks>
         public static NativeModule LoadFrom( string path, Context context )
         {
-            if( string.IsNullOrWhiteSpace( path ) )
-                throw new ArgumentException( "path cannot be null or an empty string", nameof( path ) );
-
-            if( !File.Exists( path ) )
-                throw new FileNotFoundException( "Specified bit-code file does not exist", path );
-
             using( var buffer = new MemoryBuffer( path ) )
             {
                 LLVMModuleRef modRef;
                 IntPtr errMsgPtr;
-                if( NativeMethods.ParseBitcodeInContext( context.ContextHandle, buffer.BufferHandle, out modRef, out errMsgPtr ).Failed )
+                if( NativeMethods.ParseIRInContext( context.ContextHandle, buffer.BufferHandle, out modRef, out errMsgPtr ).Failed )
                 {
                     var errMsg = NativeMethods.MarshalMsg( errMsgPtr );
                     throw new InternalCodeGeneratorException( errMsg );

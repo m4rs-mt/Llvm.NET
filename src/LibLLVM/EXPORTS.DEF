@@ -1,5 +1,5 @@
 EXPORTS
-; extensions to standard LLVM-C API
+;;; extensions to standard LLVM-C API
 LLVMAddModuleFlag
 LLVMVerifyFunctionEx
 LLVMConstantAsMetadata
@@ -965,3 +965,11 @@ LLVMInitializeXCoreTarget
 LLVMInitializeXCoreTargetMC
 LLVMInitializeXCoreDisassembler
 LLVMInitializeXCoreTargetInfo
+
+;;; Experimental APIs - do not use
+LLVMCreateCustomBooleanOption
+LLVMGetBooleanOption
+LLVMGetUnsignedOption
+LLVMGetStringOption
+
+
