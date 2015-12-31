@@ -41,7 +41,7 @@ namespace Llvm.NET
         /// <summary>Positions the builder before the given instruction</summary>
         /// <param name="instr">Instruction to position the builder before</param>
         /// <remarks>This method will position the builder to add new instructions
-        /// immeidiately before the specified instruction.
+        /// immediately before the specified instruction.
         /// <note type="note">It is important to keep in mind that this can change the
         /// block this builder is targeting. That is, <paramref name="instr"/>
         /// is not required to come from the same block the instruction builder is
@@ -116,7 +116,7 @@ namespace Llvm.NET
             LLVMValueRef hCall = BuildCall( func, args );
             var retVal =  Value.FromHandle<CallInstruction>( hCall );
             // review:
-            // Should this add callsite param attributes from function?
+            // Should this add call-site parameter attributes from function?
             // Underlying LLVM doesn't do that, what's the thinking there...
             return retVal;
         }
@@ -189,7 +189,7 @@ namespace Llvm.NET
         }
 
         /// <summary>Creates a <see cref="Value"/> that accesses an element (field) of a structure</summary>
-        /// <param name="pointer">pointer to the strucure to get an element from</param>
+        /// <param name="pointer">pointer to the structure to get an element from</param>
         /// <param name="index">element index</param>
         /// <returns>
         /// <para><see cref="Value"/> for the member access. This is a <see cref="Value"/>
@@ -197,7 +197,7 @@ namespace Llvm.NET
         /// can so the actual type of the result may be <see cref="ConstantExpression"/>
         /// or <see cref="Instructions.GetElementPtr"/>.</para>
         /// <para>Note that <paramref name="pointer"/> must be a pointer to a structure
-        /// or an excpetion is thrown.</para>
+        /// or an exception is thrown.</para>
         /// </returns>
         public Value GetStructElementPointer( Value pointer, uint index )
         {
@@ -218,14 +218,14 @@ namespace Llvm.NET
 
         /// <summary>Creates a <see cref="Value"/> that accesses an element of a type referenced by a pointer</summary>
         /// <param name="pointer">pointer to get an element from</param>
-        /// <param name="args">additional indeces for computing the resulting pointer</param>
+        /// <param name="args">additional indices for computing the resulting pointer</param>
         /// <returns>
         /// <para><see cref="Value"/> for the member access. This is a <see cref="Value"/>
         /// as LLVM may optimize the expression to a <see cref="ConstantExpression"/> if it 
         /// can so the actual type of the result may be <see cref="ConstantExpression"/>
         /// or <see cref="Instructions.GetElementPtr"/>.</para>
         /// <para>Note that <paramref name="pointer"/> must be a pointer to a structure
-        /// or an excpetion is thrown.</para>
+        /// or an exception is thrown.</para>
         /// </returns>
         /// <remarks>
         /// For details on GetElementPointer (GEP) see http://llvm.org/docs/GetElementPtr.html. The
@@ -251,14 +251,14 @@ namespace Llvm.NET
 
         /// <summary>Creates a <see cref="Value"/> that accesses an element of a type referenced by a pointer</summary>
         /// <param name="pointer">pointer to get an element from</param>
-        /// <param name="args">additional indeces for computing the resulting pointer</param>
+        /// <param name="args">additional indices for computing the resulting pointer</param>
         /// <returns>
         /// <para><see cref="Value"/> for the member access. This is a <see cref="Value"/>
         /// as LLVM may optimize the expression to a <see cref="ConstantExpression"/> if it 
         /// can so the actual type of the result may be <see cref="ConstantExpression"/>
         /// or <see cref="Instructions.GetElementPtr"/>.</para>
         /// <para>Note that <paramref name="pointer"/> must be a pointer to a structure
-        /// or an excpetion is thrown.</para>
+        /// or an exception is thrown.</para>
         /// </returns>
         /// <remarks>
         /// For details on GetElementPointer (GEP) see http://llvm.org/docs/GetElementPtr.html. The
@@ -274,14 +274,14 @@ namespace Llvm.NET
 
         /// <summary>Creates a <see cref="Value"/> that accesses an element of a type referenced by a pointer</summary>
         /// <param name="pointer">pointer to get an element from</param>
-        /// <param name="args">additional indeces for computing the resulting pointer</param>
+        /// <param name="args">additional indices for computing the resulting pointer</param>
         /// <returns>
         /// <para><see cref="Value"/> for the member access. This is a <see cref="Value"/>
         /// as LLVM may optimize the expression to a <see cref="ConstantExpression"/> if it 
         /// can so the actual type of the result may be <see cref="ConstantExpression"/>
         /// or <see cref="Instructions.GetElementPtr"/>.</para>
         /// <para>Note that <paramref name="pointer"/> must be a pointer to a structure
-        /// or an excpetion is thrown.</para>
+        /// or an exception is thrown.</para>
         /// </returns>
         /// <remarks>
         /// For details on GetElementPointer (GEP) see http://llvm.org/docs/GetElementPtr.html. The
@@ -307,14 +307,14 @@ namespace Llvm.NET
 
         /// <summary>Creates a <see cref="Value"/> that accesses an element of a type referenced by a pointer</summary>
         /// <param name="pointer">pointer to get an element from</param>
-        /// <param name="args">additional indeces for computing the resulting pointer</param>
+        /// <param name="args">additional indices for computing the resulting pointer</param>
         /// <returns>
         /// <para><see cref="Value"/> for the member access. This is a User as LLVM may 
         /// optimize the expression to a <see cref="ConstantExpression"/> if it 
         /// can so the actual type of the result may be <see cref="ConstantExpression"/>
         /// or <see cref="Instructions.GetElementPtr"/>.</para>
         /// <para>Note that <paramref name="pointer"/> must be a pointer to a structure
-        /// or an excpetion is thrown.</para>
+        /// or an exception is thrown.</para>
         /// </returns>
         /// <remarks>
         /// For details on GetElementPointer (GEP) see http://llvm.org/docs/GetElementPtr.html. The
@@ -665,10 +665,10 @@ namespace Llvm.NET
         /// <param name="source">Source pointer of the memcpy</param>
         /// <param name="len">length of the data to copy</param>
         /// <param name="align">Alignment of the data for the copy</param>
-        /// <param name="isVolatile">Flag to indicate if the copy invovles volatile data such as physical registers</param>
+        /// <param name="isVolatile">Flag to indicate if the copy involves volatile data such as physical registers</param>
         /// <returns><see cref="Intrinsic"/> call for the memcpy</returns>
         /// <remarks>
-        /// LLVM has many overloaded variants of the memcpy instrinsic, this implementation will deduce the types from
+        /// LLVM has many overloaded variants of the memcpy intrinsic, this implementation will deduce the types from
         /// the provided values and generate a more specific call without the need to provide overloaded forms of this
         /// method and otherwise complicating the calling code.
         /// </remarks>
@@ -735,17 +735,17 @@ namespace Llvm.NET
         /// <param name="source">Source pointer of the memcpy</param>
         /// <param name="len">length of the data to copy</param>
         /// <param name="align">Alignment of the data for the copy</param>
-        /// <param name="isVolatile">Flag to indicate if the copy invovles volatile data such as physical registers</param>
+        /// <param name="isVolatile">Flag to indicate if the copy involves volatile data such as physical registers</param>
         /// <returns><see cref="Intrinsic"/> call for the memcpy</returns>
         /// <remarks>
-        /// LLVM has many overloaded variants of the memmov instrinsic, this implementation currently assumes the 
+        /// LLVM has many overloaded variants of the memmov intrinsic, this implementation currently assumes the 
         /// single form defined by <see cref="Intrinsic.MemMoveName"/>, which matches the classic "C" style memmov
         /// function. However future implementations should be able to deduce the types from the provided values
         /// and generate a more specific call without changing any caller code (as is done with <see cref="MemCpy(NativeModule, Value, Value, Value, int, bool)"/>. 
         /// </remarks>
         public Value MemMove( NativeModule module, Value destination, Value source, Value len, Int32 align, bool isVolatile )
         {
-            //TODO: make this auto select the LLVM instrinsic signature like memcpy...
+            //TODO: make this auto select the LLVM intrinsic signature like memcpy...
             if( !destination.NativeType.IsPointer )
                 throw new ArgumentException( "Pointer type expected", nameof( destination ) );
 
@@ -783,10 +783,10 @@ namespace Llvm.NET
         /// <param name="value">fill value for the memset</param>
         /// <param name="len">length of the data to fill</param>
         /// <param name="align">ALignment of the data for the fill</param>
-        /// <param name="isVolatile">Flag to indicate if the fill invovles volatile data such as physical registers</param>
+        /// <param name="isVolatile">Flag to indicate if the fill involves volatile data such as physical registers</param>
         /// <returns><see cref="Intrinsic"/> call for the memcpy</returns>
         /// <remarks>
-        /// LLVM has many overloaded variants of the memcpy instrinsic, this implementation currently assumes the 
+        /// LLVM has many overloaded variants of the memcpy intrinsic, this implementation currently assumes the 
         /// single form defined by <see cref="Intrinsic.MemSetName"/>, which matches the classic "C" style memcpy
         /// function. However future implementations should be able to deduce the types from the provided values
         /// and generate a more specific call without changing any caller code (as is done with <see cref="MemCpy(NativeModule, Value, Value, Value, int, bool)"/>. 
@@ -945,7 +945,7 @@ namespace Llvm.NET
             LLVMValueRef[ ] llvmArgs = args.Select( v => v.ValueHandle ).ToArray( );
             int argCount = llvmArgs.Length;
 
-            // must always provide at least one element for succesful marshaling/interop, but tell LLVM there are none
+            // must always provide at least one element for successful marshaling/interop, but tell LLVM there are none
             if( argCount == 0 )
                 llvmArgs = new LLVMValueRef[ 1 ];
 
