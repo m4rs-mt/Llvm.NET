@@ -439,6 +439,36 @@ namespace Llvm.NET
             return retVal;
         }
 
+        /// <summary>Converts a constant into a metadata node</summary>
+        /// <param name="constant">The constant to convert</param>
+        /// <returns>new metadata node</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Specific type required by interop call" )]
+        public ConstantAsMetadata AsMetadata( Constant constant )
+        {
+            if( constant == null )
+                throw new ArgumentNullException( nameof( constant ) );
+            var metadata = NativeMethods.ConstantAsMetadata( constant.ValueHandle );
+            return LlvmMetadata.FromHandle<ConstantAsMetadata>( this, metadata );
+        }
+
+        /// <summary>Creates a metadata node from the given operands</summary>
+        /// <param name="nodes">The operands for the new metadata node</param>
+        /// <returns>new metadata node</returns>
+        public MDNode CreateMetadata( params LlvmMetadata[] nodes )
+        {
+            if( nodes == null )
+                throw new ArgumentNullException( nameof( nodes ) );
+            if( nodes.Length < 1 )
+                throw new ArgumentOutOfRangeException( nameof( nodes ) );
+
+            LLVMMetadataRef[] valueRefs = new LLVMMetadataRef[ nodes.Length ];
+            for( int i = 0, e = valueRefs.Length; i < e; ++i )
+                valueRefs[i] = nodes[i].MetadataHandle;
+
+            var handle = NativeMethods.MDNode2( ContextHandle, out valueRefs[0], ( uint )nodes.Length );
+            return LlvmMetadata.FromHandle<MDNode>( this, handle );
+        }
+
         /// <summary>Creates a metadata string from the given string</summary>
         /// <param name="value">string to create as metadata</param>
         /// <returns>new metadata string</returns>
